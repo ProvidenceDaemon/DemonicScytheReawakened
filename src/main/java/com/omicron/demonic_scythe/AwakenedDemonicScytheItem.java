@@ -60,12 +60,12 @@ public class AwakenedDemonicScytheItem extends Item {
                     duration =  player.getActivePotionEffect(Registration.DEMONIC_CORRUPTION).getDuration();
                     amplifier = player.getActivePotionEffect(Registration.DEMONIC_CORRUPTION).getAmplifier();
                 }
-                if(duration > Config.ticksCorruption)
+                if(duration > Config.ticksCorruptionAwakened)
                 {
-                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulate, amplifier + 1));
+                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulateAwakened, amplifier + 1));
                 }
                 else
-                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulate, amplifier));
+                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulateAwakened, amplifier));
             }
         }
     }
