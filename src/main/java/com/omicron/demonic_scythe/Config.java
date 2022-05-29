@@ -9,7 +9,7 @@ public class Config {
     // This values below you can access elsewhere in your mod:
     public static int demonicScytheCooldown;
     public static int ticksCorruption;
-    public static float healingPerTarget;
+    public static int healingPerTarget;
     public static int ticksAccumulate;
 
     // Call this from CommonProxy.preInit(). It will create our config if it doesn't
@@ -33,7 +33,7 @@ public class Config {
         // cfg.getBoolean() will get the value in the config if it is already specified there. If not it will create the value.
         demonicScytheCooldown = cfg.getInt("demonicScytheCooldown", CATEGORY_GENERAL, 40, 5, Integer.MAX_VALUE, "Cooldown of the spin attack in ticks");
         ticksCorruption = cfg.getInt("secondsCorruption", CATEGORY_GENERAL, 200, 1, Integer.MAX_VALUE, "how many ticks of corruption per level of debuff");
-        healingPerTarget = cfg.getFloat("healingPerTarget", CATEGORY_GENERAL, 1, Float.MIN_VALUE, Float.MIN_VALUE, "how much awakened scythe spin attack heals per target hit");
+        healingPerTarget = cfg.getInt("healingPerTarget", CATEGORY_GENERAL, 2, 0, Integer.MAX_VALUE, "how much awakened scythe spin attack heals per target hit");
         ticksAccumulate = cfg.getInt("ticksAccumulate", CATEGORY_GENERAL, 2, 1, Integer.MAX_VALUE, "how many ticks of debuff is applied per tick of holding a scythe");
     }
 }

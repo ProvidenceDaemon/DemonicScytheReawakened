@@ -1,8 +1,11 @@
 package com.omicron.demonic_scythe;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
@@ -38,6 +41,13 @@ public class Registration {
     {
         event.getRegistry().register(DEMONIC_SCYTHE);
         event.getRegistry().register(AWAKENED_DEMONIC_SCYTHE);
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(ModelRegistryEvent event)
+    {
+        ModelLoader.setCustomModelResourceLocation(DEMONIC_SCYTHE, 0, new ModelResourceLocation(DEMONIC_SCYTHE.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(AWAKENED_DEMONIC_SCYTHE, 0, new ModelResourceLocation(AWAKENED_DEMONIC_SCYTHE.getRegistryName(), "inventory"));
     }
 
     @SubscribeEvent

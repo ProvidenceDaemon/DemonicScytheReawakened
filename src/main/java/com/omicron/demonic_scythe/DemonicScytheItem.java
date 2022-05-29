@@ -1,8 +1,12 @@
 package com.omicron.demonic_scythe;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,7 +32,6 @@ public class DemonicScytheItem extends Item {
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
         // Cooldown
-        System.out.println(Config.demonicScytheCooldown);
         NBTTagCompound tag = new NBTTagCompound();
         if(stack.getTagCompound() != null)
             tag = stack.getTagCompound();
@@ -84,19 +87,32 @@ public class DemonicScytheItem extends Item {
             stack.setTagCompound(tag);
             player.setHeldItem(hand, stack);
             //player.setHeldItem(hand, new ItemStack(Items.ACACIA_BOAT));
-            System.out.println(use);
             if(worldIn instanceof WorldServer)
                 for(Entity entity : worldIn.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.getPosition(), player.getPosition()).grow(6.0)))
                     if(entity instanceof EntityLivingBase)
                     {
                         EntityLivingBase livingEntity = (EntityLivingBase) entity;
                         if(!entity.equals(player))
-                            livingEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), 1);
+                            livingEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), 7);
                     }
             return //EnumActionResult.SUCCESS;
             new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
         return //EnumActionResult.PASS;
                 new ActionResult<>(EnumActionResult.PASS, stack);
+    }
+
+    @Override
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)
+    {
+        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(slot);
+
+        if (slot == EntityEquipmentSlot.MAINHAND)
+        {
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 7, 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+        }
+
+        return multimap;
     }
 }
