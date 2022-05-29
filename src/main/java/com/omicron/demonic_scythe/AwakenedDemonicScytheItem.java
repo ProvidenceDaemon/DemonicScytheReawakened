@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
@@ -19,13 +20,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class AwakenedDemonicScytheItem extends Item {
+public class AwakenedDemonicScytheItem extends ItemSword {
 
     public static final String COOLDOWN = "cooldown";
     public static final String USE = "use";
 
     public AwakenedDemonicScytheItem()
     {
+        super(ToolMaterial.DIAMOND);
         this.setUnlocalizedName("awakened_demonic_scythe");
         this.setRegistryName(DemonicScythe.MODID, "awakened_demonic_scythe");
         this.setMaxStackSize(1);

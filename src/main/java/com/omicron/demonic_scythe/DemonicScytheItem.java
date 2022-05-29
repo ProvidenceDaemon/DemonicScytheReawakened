@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
@@ -16,13 +17,16 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class DemonicScytheItem extends Item {
+import java.util.ArrayList;
+
+public class DemonicScytheItem extends ItemSword {
 
     public static final String COOLDOWN = "cooldown";
     public static final String USE = "use";
 
     public DemonicScytheItem()
     {
+        super(ToolMaterial.DIAMOND);
         this.setUnlocalizedName("demonic_scythe");
         this.setRegistryName(DemonicScythe.MODID, "demonic_scythe");
         this.setMaxStackSize(1);
@@ -59,10 +63,16 @@ public class DemonicScytheItem extends Item {
                 }
                 if(duration > Config.ticksCorruption)
                 {
-                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulate, amplifier + 1));
+                    PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulate, amplifier + 1);
+                    effect.setCurativeItems(new ArrayList<>());
+                    player.addPotionEffect(effect);
                 }
                 else
-                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulate, amplifier));
+                {
+                    PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulate, amplifier);
+                    effect.setCurativeItems(new ArrayList<>());
+                    player.addPotionEffect(effect);
+                }
             }
         }
     }
@@ -70,7 +80,7 @@ public class DemonicScytheItem extends Item {
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
     {
-        return false; //!ItemStack.areItemStacksEqual(oldStack, newStack);
+        return false; //!ItemStack.areItemStacksEqual(oldStack, newStack); n
     }
 
     @Override

@@ -12,6 +12,8 @@ import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
+
 @Mod.EventBusSubscriber(modid = DemonicScythe.MODID)
 public class Registration {
 
@@ -56,7 +58,9 @@ public class Registration {
         if(event.getPotionEffect().getPotion() == DEMONIC_CORRUPTION && event.getPotionEffect().getAmplifier() > 0)
         {
             event.getEntityLiving().removePotionEffect(DEMONIC_CORRUPTION);
-            event.getEntityLiving().addPotionEffect(new PotionEffect(DEMONIC_CORRUPTION, Config.ticksCorruption, event.getPotionEffect().getAmplifier() - 1));
+            PotionEffect effect = new PotionEffect(DEMONIC_CORRUPTION, Config.ticksCorruption, event.getPotionEffect().getAmplifier() - 1);
+            effect.setCurativeItems(new ArrayList<>());
+            event.getEntityLiving().addPotionEffect(effect);
         }
 
     }
