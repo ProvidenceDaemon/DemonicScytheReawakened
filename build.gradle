@@ -17,8 +17,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = '1.1'
-group = 'com.omicron.spectral_edge' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'spectral_edge'
+group = 'com.omicron.demonic_scythe' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'demonic_scythe'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 

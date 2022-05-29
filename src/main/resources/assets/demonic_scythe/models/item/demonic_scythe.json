@@ -1,0 +1,44 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "demonic_scythe:items/demonic_scythe"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 55],
+			"translation": [0, 4.25, 0],
+			"scale": [1.9, 1.9, 1.19]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 90, -55],
+			"translation": [0, 4.5, 0],
+			"scale": [1.9, 1.9, 1.2]
+		},
+		"firstperson_righthand": {
+			"rotation": [-70, -90, 0],
+			"translation": [4, 6, 0.75],
+			"scale": [1.7, 1.7, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-70, 90, 0],
+			"translation": [5, 6.75, 0.25],
+			"scale": [1.7, 1.7, 1]
+		},
+		"ground": {
+			"translation": [0, 4.25, 0],
+			"scale": [0.9375, 0.9375, 0.9375]
+		},
+		"gui": {
+			"translation": [0.25, 0, 0]
+		},
+		"head": {
+			"rotation": [-108.25, -90, 0],
+			"translation": [0, 11.5, 5]
+		},
+		"fixed": {
+			"translation": [0.5, -0.25, 0],
+			"scale": [1.1, 1.1, 1.3]
+		}
+	}
+}
