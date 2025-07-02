@@ -19,19 +19,15 @@ public class DemonicScythe
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        // some example code
         File directory = event.getModConfigurationDirectory();
         Registration.config = new Configuration(new File(directory.getPath(), "demonic_scythe.cfg"));
         Config.readConfig();
-        System.out.println("DIRT BLOCK >> "+Blocks.DIRT.getUnlocalizedName());
         Registration.init();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        // some example code
-        System.out.println("DIRT BLOCK >> "+Blocks.DIRT.getUnlocalizedName());
     }
 
     @EventHandler
@@ -39,7 +35,5 @@ public class DemonicScythe
     {
         if (Registration.config.hasChanged())
             Registration.config.save();
-        // some example code
-        System.out.println("DIRT BLOCK >> "+Blocks.DIRT.getUnlocalizedName());
     }
 }

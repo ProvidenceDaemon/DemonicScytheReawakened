@@ -28,7 +28,7 @@ public class AwakenedDemonicScytheItem extends ItemSword {
     public AwakenedDemonicScytheItem()
     {
         super(ToolMaterial.DIAMOND);
-        this.setUnlocalizedName("awakened_demonic_scythe");
+        this.setTranslationKey("awakened_demonic_scythe");
         this.setRegistryName(DemonicScythe.MODID, "awakened_demonic_scythe");
         this.setMaxStackSize(1);
     }
