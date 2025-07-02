@@ -16,6 +16,8 @@ public class Config {
     public static int ticksCorruptionAwakened;
     public static int ticksAccumulateAwakened;
 
+    public static int minCorruptionHealth;
+
     // Call this from CommonProxy.preInit(). It will create our config if it doesn't
     // exist yet and read the values if it does exist.
     public static void readConfig() {
@@ -43,5 +45,7 @@ public class Config {
         demonicScytheCooldownAwakened = cfg.getInt("demonicScytheCooldownAwakened", CATEGORY_GENERAL, 30, 5, Integer.MAX_VALUE, "Cooldown of the spin attack in ticks - awakened");
         ticksCorruptionAwakened = cfg.getInt("secondsCorruptionAwakened", CATEGORY_GENERAL, 160, 1, Integer.MAX_VALUE, "how many ticks of corruption per level of debuff - awakened");
         ticksAccumulateAwakened = cfg.getInt("ticksAccumulateAwakened", CATEGORY_GENERAL, 4, 1, Integer.MAX_VALUE, "how many ticks of debuff is applied per tick of holding a scythe - awakened");
+
+        minCorruptionHealth = cfg.getInt("minCorruptionHealth", CATEGORY_GENERAL, 2, 2, Integer.MAX_VALUE, "The Demonic Corruption debuff will not cause the player to go below this amount of health");
     }
 }

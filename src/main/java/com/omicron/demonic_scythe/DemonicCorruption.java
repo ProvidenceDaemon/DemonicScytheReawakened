@@ -8,7 +8,7 @@ public class DemonicCorruption extends Potion {
         super(true, 9643043);
         this.setRegistryName(DemonicScythe.MODID, "demonic_corruption");
         this.setPotionName("effect.demonic_corruption");
-        this.registerPotionAttributeModifier(SharedMonsterAttributes.MAX_HEALTH, "5D6F0BA2-1186-93AC-B896-C61C5CEE99C1", -2.0D, 0);
+        this.registerPotionAttributeModifier(SharedMonsterAttributes.MAX_HEALTH, "5D6F0BA2-1186-93AC-B896-C61C5CEE99C1", -1.0D, 0);
     }
 
     @Override

@@ -62,7 +62,7 @@ public class AwakenedDemonicScytheItem extends ItemSword {
                     duration =  player.getActivePotionEffect(Registration.DEMONIC_CORRUPTION).getDuration();
                     amplifier = player.getActivePotionEffect(Registration.DEMONIC_CORRUPTION).getAmplifier();
                 }
-                if(duration > Config.ticksCorruptionAwakened)
+                if(duration > Config.ticksCorruptionAwakened && player.getMaxHealth() > Config.minCorruptionHealth)
                 {
                     player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulateAwakened, amplifier + 1));
                 }

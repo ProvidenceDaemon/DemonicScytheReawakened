@@ -61,7 +61,7 @@ public class DemonicScytheItem extends ItemSword {
                     duration =  player.getActivePotionEffect(Registration.DEMONIC_CORRUPTION).getDuration();
                     amplifier = player.getActivePotionEffect(Registration.DEMONIC_CORRUPTION).getAmplifier();
                 }
-                if(duration > Config.ticksCorruption)
+                if(duration > Config.ticksCorruption && player.getMaxHealth() > Config.minCorruptionHealth)
                 {
                     PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulate, amplifier + 1);
                     effect.setCurativeItems(new ArrayList<>());
