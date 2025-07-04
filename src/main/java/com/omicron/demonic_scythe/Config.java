@@ -46,6 +46,6 @@ public class Config {
         ticksCorruptionAwakened = cfg.getInt("secondsCorruptionAwakened", CATEGORY_GENERAL, 160, 1, Integer.MAX_VALUE, "how many ticks of corruption per level of debuff - awakened");
         ticksAccumulateAwakened = cfg.getInt("ticksAccumulateAwakened", CATEGORY_GENERAL, 4, 1, Integer.MAX_VALUE, "how many ticks of debuff is applied per tick of holding a scythe - awakened");
 
-        minCorruptionHealth = cfg.getInt("minCorruptionHealth", CATEGORY_GENERAL, 2, 2, Integer.MAX_VALUE, "The Demonic Corruption debuff will not cause the player to go below this amount of health");
+        minCorruptionHealth = cfg.getInt("minCorruptionHealth", CATEGORY_GENERAL, 5, 1, Integer.MAX_VALUE, "The Demonic Corruption debuff will not cause the player to go below this amount of health");
     }
 }
