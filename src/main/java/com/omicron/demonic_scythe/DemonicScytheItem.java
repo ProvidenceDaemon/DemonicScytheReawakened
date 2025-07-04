@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 
 public class DemonicScytheItem extends ItemSword {
 
-    public static final String COOLDOWN = "cooldown";
     public static final String USE = "use";
 
     public DemonicScytheItem()
@@ -87,29 +87,9 @@ public class DemonicScytheItem extends ItemSword {
     //public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
-        ItemStack stack = player.getHeldItem(hand);
-        NBTTagCompound tag = stack.getTagCompound();
-        int use = tag.getInteger(USE);
-        if(use <= 0)
-        {
-            player.swingArm(hand);
-            tag.setInteger(USE, Config.demonicScytheCooldown);
-            stack.setTagCompound(tag);
-            player.setHeldItem(hand, stack);
-            //player.setHeldItem(hand, new ItemStack(Items.ACACIA_BOAT));
-            if(worldIn instanceof WorldServer)
-                for(Entity entity : worldIn.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.getPosition(), player.getPosition()).grow(6.0)))
-                    if(entity instanceof EntityLivingBase)
-                    {
-                        EntityLivingBase livingEntity = (EntityLivingBase) entity;
-                        if(!entity.equals(player))
-                            livingEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), 7);
-                    }
-            return //EnumActionResult.SUCCESS;
-            new ActionResult<>(EnumActionResult.SUCCESS, stack);
-        }
-        return //EnumActionResult.PASS;
-                new ActionResult<>(EnumActionResult.PASS, stack);
+        player.getCooldownTracker().setCooldown(this, Config.demonicScytheCooldown);
+        player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 0.6F );
+        return SpinAttackHandler.SpinAttack(worldIn, player, hand, Config.spinAttackDamage);
     }
 
     @Override

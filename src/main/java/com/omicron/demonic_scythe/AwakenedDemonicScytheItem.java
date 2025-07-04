@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,9 +23,6 @@ import net.minecraft.world.WorldServer;
 
 public class AwakenedDemonicScytheItem extends ItemSword {
 
-    public static final String COOLDOWN = "cooldown";
-    public static final String USE = "use";
-
     public AwakenedDemonicScytheItem()
     {
         super(ToolMaterial.DIAMOND);
@@ -36,19 +34,6 @@ public class AwakenedDemonicScytheItem extends ItemSword {
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-        // Cooldown
-        NBTTagCompound tag = new NBTTagCompound();
-        if(stack.getTagCompound() != null)
-            tag = stack.getTagCompound();
-        else
-            stack.setTagCompound(tag);
-        int use = tag.getInteger(USE);
-
-        if(use > 0)
-        {
-            tag.setInteger(USE, use - 1);
-            stack.setTagCompound(tag);
-        }
         // Corruption
         if(entityIn != null && isSelected)
         {
@@ -75,41 +60,15 @@ public class AwakenedDemonicScytheItem extends ItemSword {
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
     {
-        return false; //!ItemStack.areItemStacksEqual(oldStack, newStack);
+        return false;
     }
 
     @Override
-    //public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
     {
-        ItemStack stack = player.getHeldItem(hand);
-        NBTTagCompound tag = stack.getTagCompound();
-        int use = tag.getInteger(USE);
-        if(use <= 0)
-        {
-            player.swingArm(hand);
-            tag.setInteger(USE, 40);
-            stack.setTagCompound(tag);
-            player.setHeldItem(hand, stack);
-            //player.setHeldItem(hand, new ItemStack(Items.ACACIA_BOAT));
-            int healAmount = 0;
-            //if(worldIn instanceof WorldServer)
-                for(Entity entity : worldIn.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.getPosition(), player.getPosition()).grow(6.0)))
-                    if(entity instanceof EntityLivingBase)
-                    {
-                        EntityLivingBase livingEntity = (EntityLivingBase) entity;
-                        if(!entity.equals(player))
-                        {
-                            livingEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), 9);
-                            healAmount++;
-                        }
-                    }
-            player.heal(healAmount * Config.healingPerTarget);
-            return //EnumActionResult.SUCCESS;
-                    new ActionResult<>(EnumActionResult.SUCCESS, stack);
-        }
-        return //EnumActionResult.PASS;
-                new ActionResult<>(EnumActionResult.PASS, stack);
+        player.getCooldownTracker().setCooldown(this, Config.demonicScytheCooldownAwakened);
+        player.playSound(SoundEvents.ENTITY_WITHER_AMBIENT, 0.8F, 0.4F );
+        return SpinAttackHandler.SpinAttack(worldIn, player, hand, Config.awakenedSpinAttackDamage);
     }
 
     @Override
