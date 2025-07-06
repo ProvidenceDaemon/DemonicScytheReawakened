@@ -21,6 +21,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import java.util.ArrayList;
+
 public class AwakenedDemonicScytheItem extends ItemSword {
 
     public AwakenedDemonicScytheItem()
@@ -49,10 +51,13 @@ public class AwakenedDemonicScytheItem extends ItemSword {
                 }
                 if(duration > Config.ticksCorruptionAwakened && player.getMaxHealth() > Config.minCorruptionHealth)
                 {
-                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulateAwakened, amplifier + 1));
+                    PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulateAwakened, amplifier + 1);
+                    player.addPotionEffect(effect);
                 }
-                else
-                    player.addPotionEffect(new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulateAwakened, amplifier));
+                else{
+                    PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulateAwakened, amplifier);
+                    player.addPotionEffect(effect);
+                }
             }
         }
     }

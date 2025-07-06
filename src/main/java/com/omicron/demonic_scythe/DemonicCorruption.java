@@ -9,6 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+
 public class DemonicCorruption extends Potion {
     public static final ResourceLocation CORRUPTION_ICON = new ResourceLocation(DemonicScythe.MODID, "textures/gui/demonic_corruption.png");
     protected DemonicCorruption() {
@@ -19,10 +22,10 @@ public class DemonicCorruption extends Potion {
     }
 
     @Override
+    @Nonnull
     public java.util.List<net.minecraft.item.ItemStack> getCurativeItems()
     {
-        java.util.ArrayList<net.minecraft.item.ItemStack> ret = new java.util.ArrayList<>();
-        return ret;
+        return new ArrayList<>();
     }
     //Rendering code from ACGaming's Default Potion Tweaks
     @Override

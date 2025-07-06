@@ -21,9 +21,6 @@ import net.minecraft.world.WorldServer;
 import java.util.ArrayList;
 
 public class DemonicScytheItem extends ItemSword {
-
-    public static final String USE = "use";
-
     public DemonicScytheItem()
     {
         super(ToolMaterial.DIAMOND);
@@ -35,19 +32,6 @@ public class DemonicScytheItem extends ItemSword {
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-        // Cooldown
-        NBTTagCompound tag = new NBTTagCompound();
-        if(stack.getTagCompound() != null)
-            tag = stack.getTagCompound();
-        else
-            stack.setTagCompound(tag);
-        int use = tag.getInteger(USE);
-
-        if(use > 0)
-        {
-            tag.setInteger(USE, use - 1);
-            stack.setTagCompound(tag);
-        }
         // Corruption
         if(entityIn != null && isSelected)
         {
@@ -64,13 +48,11 @@ public class DemonicScytheItem extends ItemSword {
                 if(duration > Config.ticksCorruption && player.getMaxHealth() > Config.minCorruptionHealth)
                 {
                     PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, Config.ticksAccumulate, amplifier + 1);
-                    effect.setCurativeItems(new ArrayList<>());
                     player.addPotionEffect(effect);
                 }
                 else
                 {
                     PotionEffect effect = new PotionEffect(Registration.DEMONIC_CORRUPTION, duration + Config.ticksAccumulate, amplifier);
-                    effect.setCurativeItems(new ArrayList<>());
                     player.addPotionEffect(effect);
                 }
             }
